@@ -4,7 +4,8 @@ package academy.javapro;
  * SavingsAccount class extending the abstract Account class.
  * Features interest rate and minimum balance requirement.
  */
-public class SavingsAccount extends Account {
+public class SavingsAccount extends Account
+{
     private final double interestRate;
     private static final double MIN_BALANCE = 100.0; // Minimum balance requirement
 
@@ -16,7 +17,8 @@ public class SavingsAccount extends Account {
      * @param initialBalance The initial balance
      * @param interestRate The annual interest rate (%)
      */
-    public SavingsAccount(String accountNumber, String customerName, double initialBalance, double interestRate) {
+    public SavingsAccount(String accountNumber, String customerName, double initialBalance, double interestRate)
+    {
         super(accountNumber, customerName, initialBalance); // Call to the parent constructor
         this.interestRate = interestRate;
     }
@@ -26,15 +28,20 @@ public class SavingsAccount extends Account {
      *
      * @return The calculated interest amount
      */
-    public double calculateInterest() {
-        throw new UnsupportedOperationException("Method not implemented");
+    public double calculateInterest()
+    {
+        return getBalance() * (interestRate / 100.0);
     }
 
     /**
      * Applies the calculated interest to the account balance.
      */
-    public void applyInterest() {
-        throw new UnsupportedOperationException("Method not implemented");
+    public void applyInterest()
+    {
+        double interest = calculateInterest();
+        deposit(interest);
+        logTransaction("INTEREST_APPLIED", interest);
+        System.out.println("Interest Applied: $" + String.format("%.2f", interest));
     }
 
     /**
@@ -42,15 +49,31 @@ public class SavingsAccount extends Account {
      * Ensures minimum balance is maintained.
      */
     @Override
-    public void withdraw(double amount) {
-        throw new UnsupportedOperationException("Method not implemented");
+    public void withdraw(double amount)
+    {
+        if (amount <= 0)
+        {
+            System.out.println("Withdrawal amount must be positive");
+            return;
+        }
+        if (getBalance() - amount >= MIN_BALANCE)
+        {
+            setBalance(getBalance() - amount);
+            logTransaction("WITHDRAWAL", amount);
+            System.out.println("Withdrew $" + amount + " from savings account");
+        }
+        else
+        {
+            System.out.println("Cannot withdraw $" + amount + ". Minimum balance of $" + MIN_BALANCE + " must be maintained.");
+        }
     }
 
     /**
      * Overrides the displayInfo method to include savings account-specific information.
      */
     @Override
-    public void displayInfo() {
+    public void displayInfo()
+    {
         super.displayInfo(); // Call to the parent method
         System.out.println("Account Type: Savings Account");
         System.out.println("Interest Rate: " + interestRate + "%");

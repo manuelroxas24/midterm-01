@@ -8,7 +8,8 @@ import java.util.List;
 /**
  * Interface defining the core operations that all bank accounts must implement.
  */
-public interface AccountOperations {
+public interface AccountOperations
+{
     // A list to store transaction history
     List<String> transactionHistory = new ArrayList<>();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -41,7 +42,8 @@ public interface AccountOperations {
      * @param type The type of transaction (deposit, withdrawal, fee, interest, etc.)
      * @param amount The amount involved in the transaction
      */
-    default void logTransaction(String type, double amount) {
+    default void logTransaction(String type, double amount)
+    {
         LocalDateTime now = LocalDateTime.now();
         String timestamp = now.format(formatter);
         String record = String.format("%s | %s | $%.2f | Balance: $%.2f",
@@ -54,7 +56,8 @@ public interface AccountOperations {
      *
      * @return A list of transaction records as strings
      */
-    default List<String> getTransactionHistory() {
+    default List<String> getTransactionHistory()
+    {
         return new ArrayList<>(transactionHistory); // Return a copy to prevent modification
     }
 }

@@ -7,7 +7,8 @@ import java.util.List;
  * Abstract base class for all bank accounts.
  * Implements the AccountOperations interface.
  */
-public abstract class Account implements AccountOperations {
+public abstract class Account implements AccountOperations
+{
     private final String accountNumber;
     private final String customerName;
     private double balance;
@@ -20,7 +21,8 @@ public abstract class Account implements AccountOperations {
      * @param customerName The name of the account holder
      * @param initialBalance The initial balance
      */
-    public Account(String accountNumber, String customerName, double initialBalance) {
+    public Account(String accountNumber, String customerName, double initialBalance)
+    {
         this.accountNumber = accountNumber;
         this.customerName = customerName;
         this.balance = initialBalance;
@@ -32,7 +34,8 @@ public abstract class Account implements AccountOperations {
      *
      * @return The account number
      */
-    public String getAccountNumber() {
+    public String getAccountNumber()
+    {
         return accountNumber;
     }
 
@@ -41,12 +44,14 @@ public abstract class Account implements AccountOperations {
      *
      * @return The customer name
      */
-    public String getCustomerName() {
+    public String getCustomerName()
+    {
         return customerName;
     }
 
     @Override
-    public double getBalance() {
+    public double getBalance()
+    {
         return balance;
     }
 
@@ -56,12 +61,14 @@ public abstract class Account implements AccountOperations {
      *
      * @param balance The new balance
      */
-    protected void setBalance(double balance) {
+    protected void setBalance(double balance)
+    {
         this.balance = balance;
     }
 
     @Override
-    public void deposit(double amount) {
+    public void deposit(double amount)
+    {
         if (amount <= 0) {
             System.out.println("Deposit amount must be positive");
             return;
@@ -79,14 +86,16 @@ public abstract class Account implements AccountOperations {
     public abstract void withdraw(double amount);
 
     @Override
-    public void logTransaction(String type, double amount) {
+    public void logTransaction(String type, double amount)
+    {
         String record = String.format("%s | $%.2f | Balance: $%.2f",
                                      type, amount, balance);
         transactionHistory.add(record);
     }
 
     @Override
-    public List<String> getTransactionHistory() {
+    public List<String> getTransactionHistory()
+    {
         return new ArrayList<>(transactionHistory);
     }
 
@@ -94,7 +103,8 @@ public abstract class Account implements AccountOperations {
      * Displays detailed information about the account.
      * Can be overridden by subclasses to include additional information.
      */
-    public void displayInfo() {
+    public void displayInfo()
+    {
         System.out.println("===== Account Information =====");
         System.out.println("Account Number: " + getAccountNumber());
         System.out.println("Customer Name: " + getCustomerName());
